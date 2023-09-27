@@ -7,9 +7,12 @@ fi
 
 case "$NAME" in 
     "Ubuntu" | "Debian")
-        sudo apt install -y openssh-server git ansible
+        sudo apt install -y git ansible
         ;;
     *)
-    echo "OS Name $NAME not recognized"
-    ;;
+        echo "OS Name $NAME not recognized"
+        ;;
 esac
+
+# Run initial Ansible pull
+ansible-pull -U https://github.com/CoolpeopleNetworks/Provision.git
