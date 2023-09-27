@@ -14,5 +14,7 @@ case "$NAME" in
         ;;
 esac
 
+sudo apt autoremove
+
 # Run initial Ansible pull
 ansible-pull -U https://github.com/CoolpeopleNetworks/Provision.git
