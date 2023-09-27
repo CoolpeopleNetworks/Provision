@@ -5,6 +5,11 @@ if [ -f /etc/os-release ]; then
     . /etc/os-release
 fi
 
-if [ "$NAME" == "Ubuntu" || "$NAME" == "Debian" ]; then
-    sudo apt install -y openssh-server git ansible
-fi
+case "$NAME" in 
+    "Ubuntu" | "Debian")
+        sudo apt install -y openssh-server git ansible
+        ;;
+    *)
+    echo "OS Name $NAME not recognized"
+    ;;
+esac
