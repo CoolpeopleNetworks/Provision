@@ -13,7 +13,7 @@
 - hosts: workstations
   connection: local
   become: true
-  profile:
-  - base
-  - workstation
+  roles:
+  - role: base
+  - role: workstation
 
