@@ -1,0 +1,1 @@
+ansible_puller ALL=(ALL) NOPASSWD: ALL

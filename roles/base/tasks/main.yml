@@ -1,5 +1,5 @@
 ---
-- name: base | install packages
+- name: install packages
   package:
     name:
     - tmux

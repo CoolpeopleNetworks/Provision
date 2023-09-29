@@ -1,5 +1,5 @@
 ---
-- name: workstations | ensure developer apps installed
+- name: ensure developer apps installed
   package:
     name:
     - git

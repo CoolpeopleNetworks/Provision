@@ -3,6 +3,9 @@
   connection: local
   become: true
   pre_tasks:
+  #
+  # Make sure packages are updated
+  #
   - name: pre | update packages (Debian, Ubuntu)
     apt:
       update_cache: yes
@@ -10,10 +13,36 @@
     when: ansible_distribution in ["Debian", "Ubuntu"]
     changed_when: false
 
+  tasks:
+  #
+  # ansible-pull support tasks
+  #
+  - name: create ansible_puller user
+    user:
+      name: ansible_puller
+      system: yes
+
+  - name: ensure ansible_puller added to sudoers
+    copy:
+      src: files/sudoers_ansible_puller
+      dest: /etc/sudoers.d/ansible_puller
+      owner: root
+      group: root
+      mode: 0440
+
+  - name: ensure ansible_puller cron job created
+    cron:
+      name: ansible auto-provision
+      user: ansible_puller
+      minute: "*/10"
+      job: ansible-pull -o -U https://github.com/CoolpeopleNetworks/Provision.git
+
+#
+# Workstations
+#
 - hosts: workstations
   connection: local
   become: true
   roles:
   - role: base
   - role: workstation
-
