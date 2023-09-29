@@ -4,5 +4,17 @@
   pre_tasks:
   - name: pre | update packages (Debian, Ubuntu)
     apt:
-      update_cache: true
+      update_cache: yes
+      upgrade: dist
     when: ansible_distribution in ["Debian", "Ubuntu"]
+    changed_when: false
+
+- hosts: workstations
+  become: true
+  tasks:
+  - name: workstations | ensure developer apps installed
+    package:
+      name:
+      - git
+      - clang
+      - cmake
