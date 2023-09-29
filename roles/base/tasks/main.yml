@@ -1,0 +1,6 @@
+---
+- name: base | install packages
+  package:
+    name:
+    - tmux
+    - htop

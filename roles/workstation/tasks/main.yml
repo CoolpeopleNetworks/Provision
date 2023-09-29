@@ -1,0 +1,7 @@
+---
+- name: workstations | ensure developer apps installed
+  package:
+    name:
+    - git
+    - clang
+    - cmake

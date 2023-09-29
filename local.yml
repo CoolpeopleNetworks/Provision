@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  connection: local
   become: true
   pre_tasks:
   - name: pre | update packages (Debian, Ubuntu)
@@ -10,11 +11,9 @@
     changed_when: false
 
 - hosts: workstations
+  connection: local
   become: true
-  tasks:
-  - name: workstations | ensure developer apps installed
-    package:
-      name:
-      - git
-      - clang
-      - cmake
+  profiles:
+  - profile: base
+  - profile: workstation
+
