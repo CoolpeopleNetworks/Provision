@@ -46,3 +46,13 @@
   roles:
   - role: base
   - role: workstation
+
+#
+# Servers
+#
+- hosts: servers
+  connection: local
+  become: true
+  roles:
+  - role: base
+  - role: server
