@@ -1,7 +1,7 @@
 ---
 - name: Ensure snap installed
   package:
-    name: snap
+    name: snapd
     state: present
 
 - name: Ensure the NextCloud snap package is installed
