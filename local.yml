@@ -56,3 +56,12 @@
   roles:
   - role: base
   - role: server
+
+#
+# Nextcloud Instances
+#
+- hosts: nextcloud
+  connection: local
+  become: true
+  roles:
+  - role: nextcloud_server
