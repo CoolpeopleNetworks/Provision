@@ -1,4 +1,9 @@
 ---
+- name: Ensure snap installed
+  package:
+    name: snap
+    state: resent
+
 - name: Ensure the NextCloud snap package is installed
   community.general.snap:
     name: nextcloud
