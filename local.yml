@@ -60,7 +60,7 @@
 #
 # Nextcloud Instances
 #
-- hosts: nextcloud.coolpeople.io
+- hosts: nextcloud
   connection: local
   become: true
   roles:
