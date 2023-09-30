@@ -11,7 +11,7 @@ fi
 
 case "$NAME" in 
     "Ubuntu" | "Debian")
-        sudo apt install -y snapd ansible
+        sudo apt install -y snapd git ansible
         ;;
     *)
         echo "OS Name $NAME not recognized"
