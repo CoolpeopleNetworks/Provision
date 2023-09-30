@@ -1,0 +1,45 @@
+Host gitlab
+  HostName 10.10.104.21
+  User root
+
+#
+# Hardware Nodes
+#
+Host r620-1
+  HostName r620-1.coolpeople.io
+  User root
+
+Host r620-2
+  HostName r620-2.coolpeople.io
+  User root
+
+Host r620-3
+  HostName r620-3.coolpeople.io
+  User root
+
+Host nas0
+  HostName nas0.coolpeople.io
+  User johnt
+
+Host san0
+  HostName 10.10.2.8
+  User johnt
+
+Host homeassistant
+  HostName homeassistant.coolpeople.io
+  User johnt
+
+Host ipmi-dl380
+  HostName 10.10.99.41
+  KexAlgorithms +diffie-hellman-group1-sha1
+  HostKeyAlgorithms +ssh-dss
+  User root
+
+# External Hosts
+Host github.com
+  UpdateHostKeys yes
+
+Host brookforest
+  HostName brookforest.alphapixel.com
+  User xenon
+  LocalForward 3389 127.0.0.1:3389

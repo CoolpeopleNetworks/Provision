@@ -1,4 +1,9 @@
 #!/bin/sh
+# 
+# To use this script execute:
+#
+# curl https://raw.githubusercontent.com/CoolpeopleNetworks/Provision/trunk/bootstrap.sh | bash
+#
 # NOTE: Use this script to bootstrap a system which will install required packages for ansible-pull
 if [ -f /etc/os-release ]; then
     # freedesktop.org and systemd
