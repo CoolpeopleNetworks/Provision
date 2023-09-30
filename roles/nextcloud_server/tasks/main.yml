@@ -2,5 +2,5 @@
 - name: Ensure the NextCloud snap package is installed
   community.general.snap:
     name: nextcloud
-    channel: "{{nextcloud_channel | 27/stable}}"
+    channel: '{{nextcloud_channel | "27/stable"}}'
     state: present
