@@ -15,7 +15,13 @@
     name: headscale
     state: started
 
-- name: ensure headscale configuration file created
+- name: want for headscale configuration file to exist
+  ansible.builtin.wait_for:
+    path: /etc/headspace/config.yaml
+    timeout: 30
+  changed_when: false
+
+- name: ensure headscale configuration file updated
   ansible.builtin.template:
     src: templates/config.yaml.j2
     dest: /etc/headspace/config.yaml
