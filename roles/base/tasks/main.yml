@@ -4,3 +4,10 @@
     name:
     - tmux
     - htop
+
+- name: install packages specific to Ubuntu minimal
+  package:
+    name:
+    - inetutils-ping
+    - inetutils-traceroute
+  when: ansible_distribution == "Ubuntu"
