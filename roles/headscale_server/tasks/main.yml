@@ -8,5 +8,5 @@
 
 - name: ensure headscale deb package installed
   ansible.builtin.apt:
-    deb: "/usr/share/v{{headscale_version}}/headscale_{{headscale_version}}_linux_{{headscale_arch}}.deb"
+    deb: "/usr/share/headscale_{{headscale_version}}_linux_{{headscale_arch}}.deb"
 
