@@ -10,3 +10,30 @@
   ansible.builtin.apt:
     deb: "/usr/share/headscale_{{headscale_version}}_linux_{{headscale_arch}}.deb"
 
+- name: ensure headscale service started
+  service:
+    name: headscale
+    state: started
+
+- name: ensure headscale configuration file created
+  ansible.builtin.template:
+    src: templates/config.yaml.j2
+    dest: /etc/headspace/config.yaml
+    owner: root
+    mode: '0644'
+  register: config_file
+
+- name: ensure headscale database file exists
+  copy:
+    content: ""
+    dest: /var/lib/headscale/db.sqlite
+    force: false  # don't create if already there
+    owner: root
+    group: root
+  register: database_file
+
+- name: ensure headscale service restarted if configuration file changed
+  service:
+    name: headspace
+    state: restarted
+  when: config_file.changed or database_file.changed
