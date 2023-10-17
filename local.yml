@@ -65,3 +65,12 @@
   become: true
   roles:
   - role: nextcloud_server
+
+#
+# Headscale Instances
+#
+- hosts: headscale
+  connection: local
+  become: true
+  roles:
+  - role: headscale_server

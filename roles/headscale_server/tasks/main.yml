@@ -1,0 +1,6 @@
+---
+- name: ensure headscale package has been downloaded
+  ansible.builtin.get_url:
+    url: "https://github.com/juanfont/headscale/releases/download/v{{headscale_version}}/headscale_{{headscale_version}}_linux_{{ansible_arch}}.deb"
+    dest: /usr/share/headscale.dpkg
+    mode: '0440'
