@@ -4,9 +4,3 @@ nextcloud
 
 [workstations]
 johnt-Surface-Pro
-
-[headscale:vars]
-headscale_server_url=https://headscale.coolpeople.io:8443
-headscale_version=0.22.3
-headscale_arch=amd64
-headscale_listen_addr=0.0.0.0:8443
