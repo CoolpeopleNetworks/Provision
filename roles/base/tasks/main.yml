@@ -1,4 +1,9 @@
 ---
+- name: update apt cache (on Debian/Ubuntu)
+  apt:
+    update_cache: true
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+
 - name: install packages
   package:
     name:
