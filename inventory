@@ -1,5 +1,5 @@
 [servers]
-headscale
+headscale headscale_version=0.22.3 headscale_arch=amd64
 nextcloud
 
 [workstations]
