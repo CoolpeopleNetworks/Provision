@@ -14,7 +14,7 @@
   ansible.builtin.template:
     src: templates/config.yaml.j2
     dest: /etc/headscale/config.yaml
-    owner: root
+    owner: headscale
     mode: '0644'
   register: config_file
 
@@ -34,8 +34,8 @@
     content: ""
     dest: /var/lib/headscale/db.sqlite
     force: false  # don't create if already there
-    owner: root
-    group: root
+    owner: headscale
+    group: headscale
   register: database_file
 
 - name: ensure headscale service restarted if configuration file changed
