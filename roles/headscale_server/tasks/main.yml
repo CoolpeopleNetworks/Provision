@@ -10,6 +10,14 @@
   ansible.builtin.apt:
     deb: "/usr/share/headscale_{{headscale_version}}_linux_{{headscale_arch}}.deb"
 
+- name: ensure headscale configuration file updated
+  ansible.builtin.template:
+    src: templates/config.yaml.j2
+    dest: /etc/headscale/config.yaml
+    owner: root
+    mode: '0644'
+  register: config_file
+
 - name: ensure headscale service started
   service:
     name: headscale
@@ -17,17 +25,9 @@
 
 - name: want for headscale configuration file to exist
   ansible.builtin.wait_for:
-    path: /etc/headspace/config.yaml
+    path: /etc/headscale/config.yaml
     timeout: 30
   changed_when: false
-
-- name: ensure headscale configuration file updated
-  ansible.builtin.template:
-    src: templates/config.yaml.j2
-    dest: /etc/headspace/config.yaml
-    owner: root
-    mode: '0644'
-  register: config_file
 
 - name: ensure headscale database file exists
   copy:
@@ -40,6 +40,6 @@
 
 - name: ensure headscale service restarted if configuration file changed
   service:
-    name: headspace
+    name: headscale
     state: restarted
   when: config_file.changed or database_file.changed
