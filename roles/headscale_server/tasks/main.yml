@@ -3,12 +3,6 @@
   ansible.builtin.apt:
     deb: "https://github.com/juanfont/headscale/releases/download/v{{headscale_version}}/headscale_{{headscale_version}}_linux_{{headscale_arch}}.deb"
 
-- name: want for headscale configuration file to exist
-  ansible.builtin.wait_for:
-    path: /etc/headscale/config.yaml
-    timeout: 30
-  changed_when: false
-
 - name: ensure headscale configuration file updated
   ansible.builtin.template:
     src: templates/config.yaml.j2
