@@ -85,6 +85,8 @@
 # Podman Hosts
 #
 - hosts: podman_hosts
+  connection: local
+  become: true
   tasks:
   - name: ensure podman installed
     package:
