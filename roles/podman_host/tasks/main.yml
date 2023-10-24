@@ -1,0 +1,5 @@
+---
+- name: ensure podman installed
+  package:
+    name: podman
+    state: latest

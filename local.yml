@@ -87,8 +87,6 @@
 - hosts: podman_hosts
   connection: local
   become: true
-  tasks:
-  - name: podman_hosts | ensure podman installed
-    package:
-      name: podman
-      state: latest
+
+  roles:
+  - role: podman_host
