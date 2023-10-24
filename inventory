@@ -2,5 +2,11 @@
 headscale
 nextcloud
 
+[servers:children]
+podman_hosts
+
+[podman_hosts]
+podhost1
+
 [workstations]
 johnt-Surface-Pro
