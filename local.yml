@@ -88,7 +88,7 @@
   connection: local
   become: true
   tasks:
-  - name: ensure podman installed
+  - name: podman_hosts | ensure podman installed
     package:
       name: podman
       state: latest
