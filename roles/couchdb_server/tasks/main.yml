@@ -1,11 +1,16 @@
 ---
+- name: ensure couchdb apt repository key installed
+  ansible.builtin.get_url:
+    url: https://couchdb.apache.org/repo/keys.asc
+    dest: /etc/apt/keyrings/couchdb.asc
+
 - name: ensure couchdb repository installed
   ansible.builtin.apt_repository:
-    repo: "deb https://apache.jfrog.io/artifactory/couchdb-deb/ {{ansible_distribution_release}} main"
+    repo: "deb [signed-by=/etc/apt/keyrings/couchdb.asc] https://apache.jfrog.io/artifactory/couchdb-deb/ {{ansible_distribution_release}} main"
     state: present
 
 - name: ensure couchdb installed
   ansible.builtin.apt:
-    name: coucndb
+    name: couchdb
     state: present
     update_cache: true
