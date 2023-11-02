@@ -90,3 +90,13 @@
 
   roles:
   - role: podman_host
+
+#
+# CouchDB Hosts
+#
+- hosts: couchdb_hosts
+  connection: local
+  become: true
+
+  roles:
+  - reole: couchdb_host

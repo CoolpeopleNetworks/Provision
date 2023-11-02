@@ -3,10 +3,16 @@ headscale
 nextcloud
 
 [servers:children]
+couchdb_hosts
 podman_hosts
 
 [podman_hosts]
 podhost1
+
+[couchdb_hosts]
+couchdb1
+couchdb2
+couchdb3
 
 [workstations]
 johnt-Surface-Pro
