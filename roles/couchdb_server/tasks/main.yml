@@ -1,18 +1,11 @@
 ---
-- name: add couchdb PPA repository
-  become: yes
-  apt_repository:
-    repo: ppa:couchdb/stable
+- name: ensure couchdb repository installed
+  ansible.builtin.apt_repository:
+    repo: "deb https://apache.jfrog.io/artifactory/couchdb-deb/ {{ansible_distribution_release}} main"
+    state: present
 
-- name: install couchdb
-  become: yes
-  apt:
-    name: couchdb
-  register: couchdb_install
-
-- name: stop couchdb
-  become: yes
-  service:
-    name: couchdb
-    state: stopped
-  when: couchdb_install.changed
+- name: ensure couchdb installed
+  ansible.builtin.apt:
+    name: coucndb
+    state: present
+    update_cache: true
