@@ -99,4 +99,4 @@
   become: true
 
   roles:
-  - role: couchdb_host
+  - role: couchdb_server
