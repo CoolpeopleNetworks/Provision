@@ -21,7 +21,7 @@
         state: present
     - service:
         name: qemu-guest-agent
-        state: enabled
+        state: started
     when: ansible_system_vendor == 'QEMU'
 
   #
