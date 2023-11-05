@@ -14,6 +14,16 @@
     changed_when: false
 
   tasks:
+  - name: ensure qemu-guest-agent installed on QEMU guests
+    block:
+    - package:
+        name: qemu-guest-agent
+        state: present
+    - service:
+        name: qemu-guest-agent
+        state: enabled
+    when: ansible_system_vendor == 'QEMU'
+
   #
   # ansible-pull support tasks
   #
