@@ -6,6 +6,13 @@
   #
   # Make sure packages are updated
   #
+  - name: pre | touch /tmp/ansible.txt to reflect run time
+    ansible.builtin.file:
+      path: /tmp/ansible.txt
+      state: touch
+      mode: u=rw,g=r,o=r
+    changed_when: false
+
   - name: pre | update packages (Debian, Ubuntu)
     apt:
       update_cache: yes
