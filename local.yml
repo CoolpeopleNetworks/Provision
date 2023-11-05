@@ -16,10 +16,12 @@
   tasks:
   - name: ensure qemu-guest-agent installed on QEMU guests
     block:
-    - package:
+    - name: ensure qemu-guest-agent installed
+      package:
         name: qemu-guest-agent
         state: present
-    - service:
+    - name: ensure qemu-guest-agent service started
+      service:
         name: qemu-guest-agent
         state: started
     when: ansible_system_vendor == 'QEMU'
