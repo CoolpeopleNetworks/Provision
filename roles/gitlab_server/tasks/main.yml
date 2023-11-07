@@ -20,11 +20,17 @@
       url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh 
       dest: /tmp/script.deb.sh
     
-  # - name: execute gitlab installer
-  #   shell: bash /tmp/script.deb.sh
+  - name: execute gitlab installer
+    shell: bash /tmp/script.deb.sh
 
-  # - name: remove the gitlab installer
-  #   file: 
-  #     path: /tmp/script.deb.sh
-  #     state: absent
+  - name: remove the gitlab installer
+    file: 
+      path: /tmp/script.deb.sh
+      state: absent
+
+  - name: install gitlab
+    apt:
+      name: gitlab-ee
+      environment:
+        EXTERNAL_URL: "{{gitlab_url}}"   
   when: '"gitlab" not in ansible_facts.packages'
