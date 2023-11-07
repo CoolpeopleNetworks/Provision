@@ -5,6 +5,7 @@ nextcloud
 [servers:children]
 couchdb_hosts
 podman_hosts
+gitlab_hosts
 
 [podman_hosts]
 podhost1
@@ -16,3 +17,6 @@ couchdb3
 
 [workstations]
 johnt-Surface-Pro
+
+[gitlab_hosts]
+gitlab
