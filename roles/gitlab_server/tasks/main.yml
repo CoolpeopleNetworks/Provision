@@ -1,0 +1,29 @@
+---
+# From https://about.gitlab.com/install/#ubuntu
+- name: ensure gitlab prereqs are installed
+  package:
+    name:
+    - curl
+    - openssh-server
+    - ca-certificates
+    - tzdata 
+    - perl
+    - postfix
+
+- name: check if gitlab-ctl is installed
+  package_facts:
+    manager: apt
+
+- block:
+  - name: download gitlab installer
+    get_url: 
+      url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh dest=/tmp/script.deb.sh
+    
+  - name: execute gitlab installer
+    shell: /tmp/script.deb.sh
+
+  - name: remove the gitlab installer
+    file: 
+      path: /tmp/script.deb.sh
+      state: absent
+  when: '"gitlab" not in ansible_facts.packages'
