@@ -128,6 +128,6 @@
   become: true
   vars:
     gitlab_url: https://gitlab.coolpeople.io
-
+    gitlab_version: 16.4.1-ee.0
   roles:
   - role: gitlab_server
