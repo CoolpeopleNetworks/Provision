@@ -31,6 +31,6 @@
   - name: install gitlab
     apt:
       name: gitlab-ee
-      environment:
-        EXTERNAL_URL: "{{gitlab_url}}"   
+    environment:
+      EXTERNAL_URL: "{{gitlab_url}}"   
   when: '"gitlab" not in ansible_facts.packages'
