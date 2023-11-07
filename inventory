@@ -1,7 +1,6 @@
 [servers]
 headscale
 nextcloud
-gitlab
 
 [servers:children]
 couchdb_hosts
@@ -18,3 +17,6 @@ couchdb3
 
 [workstations]
 johnt-Surface-Pro
+
+[gitlab_hosts]
+gitlab
