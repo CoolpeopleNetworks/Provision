@@ -17,7 +17,8 @@
 - block:
   - name: download gitlab installer
     get_url: 
-      url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh dest=/tmp/script.deb.sh
+      url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh 
+      dest: /tmp/script.deb.sh
     
   - name: execute gitlab installer
     shell: /tmp/script.deb.sh
