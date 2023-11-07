@@ -119,3 +119,13 @@
 
   roles:
   - role: couchdb_server
+
+#
+# Gitlab Hosts
+#
+- hosts: gitlab_hosts
+  connection: local
+  become: true
+
+  roles:
+  - role: gitlab_server
