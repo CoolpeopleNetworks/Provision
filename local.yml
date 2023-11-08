@@ -131,8 +131,3 @@
     gitlab_version: 16.4.1-ee.0
   roles:
   - role: gitlab_server
-  tasks:
-  - name: ensure certbot is installed
-    package:
-      name: certbot
-      state: present
