@@ -1,5 +1,9 @@
 ---
 # From https://about.gitlab.com/install/#ubuntu
+@
+# NOTE: This recipe does *NOT* actually install gitlab.  It just sets
+#       up the repos and installs prereqs.
+#
 - name: ensure gitlab prereqs are installed
   package:
     name:
