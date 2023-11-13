@@ -20,6 +20,7 @@ esac
 
 sudo apt autoremove
 
+sudo mkdir -p /usr/share/ansible/roles/
 sudo git clone https://github.com/istvano/ansible_role_microk8s /usr/share/ansible/roles/istvano.microk8s
 
 # Run initial Ansible pull

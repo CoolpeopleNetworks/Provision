@@ -141,6 +141,15 @@
   roles:
   - role: istvano.microk8s
     vars:
+        microk8s_version: 1.28
+        microk8s_enable_HA: true
+        microk8s_group_HA:
+          - 10.10.107.61
+          - 10.10.107.62
+          - 10.10.107.63
         microk8s_plugins:
           dns: "1.1.1.1"
           ingress: true
+          helm: true
+          helm3: true
+          rook-ceph: true
