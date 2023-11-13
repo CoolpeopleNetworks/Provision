@@ -1,0 +1,7 @@
+---
+- name: ensure microk8s installed
+  community.general.snap:
+    name: microk8s
+    classic: true
+    channel: "1.28"
+    state: present

@@ -131,3 +131,12 @@
     gitlab_version: 16.4.1-ee.0
   roles:
   - role: gitlab_server
+
+#
+# K8s Hosts
+#
+- hosts: k8s_hosts
+  connection: local
+  become: true
+  roles:
+  - role: k8s_server
