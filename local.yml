@@ -133,9 +133,9 @@
   - role: gitlab_server
 
 #
-# K8s Hosts
+# K8s Production Hosts
 #
-- hosts: k8s_hosts
+- hosts: k8s_prod
   connection: local
   become: true
   roles:
