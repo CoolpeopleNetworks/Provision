@@ -20,5 +20,7 @@ esac
 
 sudo apt autoremove
 
+sudo git clone https://github.com/istvano/ansible_role_microk8s /usr/share/ansible/plugins/modules/istvano.microk8s
+
 # Run initial Ansible pull
 ansible-pull -U https://github.com/CoolpeopleNetworks/Provision.git
