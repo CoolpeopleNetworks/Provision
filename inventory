@@ -26,6 +26,6 @@ gitlab
 k8s_prod
 
 [k8s_prod]
-k8s_prod1
-k8s_prod2
-k8s_prod3
+k8s-prod1
+k8s-prod2
+k8s-prod3
