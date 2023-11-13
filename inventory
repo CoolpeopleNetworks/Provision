@@ -23,6 +23,6 @@ johnt-Surface-Pro
 gitlab
 
 [k8s_prod]
-k8s-prod1
-k8s-prod2
-k8s-prod3
+k8s-prod1 ansible_default_ipv4="10.10.107.61"
+k8s-prod2 ansible_default_ipv4="10.10.107.62"
+k8s-prod3 ansible_default_ipv4="10.10.107.63"
