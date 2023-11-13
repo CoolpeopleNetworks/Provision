@@ -144,9 +144,9 @@
         microk8s_version: 1.28
         microk8s_enable_HA: true
         microk8s_group_HA:
-          - 10.10.107.61
-          - 10.10.107.62
-          - 10.10.107.63
+          - k8s-prod1
+          - k8s-prod2
+          - k8s-prod3
         microk8s_plugins:
           dns: "1.1.1.1"
           ingress: true
