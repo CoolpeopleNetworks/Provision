@@ -22,10 +22,7 @@ johnt-Surface-Pro
 [gitlab_hosts]
 gitlab
 
-[k8s_hosts:children]
-k8s_prod
-
-[k8s_prod]
+[k8s_hosts]
 k8s-prod1
 k8s-prod2
 k8s-prod3
