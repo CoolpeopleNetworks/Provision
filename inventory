@@ -6,7 +6,7 @@ nextcloud
 couchdb_hosts
 podman_hosts
 gitlab_hosts
-k8s_hosts
+k8s_prod
 
 [podman_hosts]
 podhost1
@@ -22,7 +22,7 @@ johnt-Surface-Pro
 [gitlab_hosts]
 gitlab
 
-[k8s_hosts]
+[k8s_prod]
 k8s-prod1
 k8s-prod2
 k8s-prod3
