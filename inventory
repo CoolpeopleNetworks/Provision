@@ -6,6 +6,7 @@ nextcloud
 couchdb_hosts
 podman_hosts
 gitlab_hosts
+postgresql_hosts
 
 [podman_hosts]
 podhost1
@@ -20,3 +21,6 @@ johnt-Surface-Pro
 
 [gitlab_hosts]
 gitlab
+
+[postgresql_hosts]
+postgresql-1
