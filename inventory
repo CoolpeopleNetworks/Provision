@@ -24,3 +24,5 @@ gitlab
 
 [postgresql_hosts]
 postgresql-1
+postgresql-2
+postgresql-3
