@@ -151,3 +151,15 @@
       name: postgresql
       state: started
       enabled: yes
+
+  - name: "Create admin database user"
+    postgresql_user:
+      state: present
+      name: "admin"
+      password: "bonky123"
+    become: yes
+    become_user: postgres
+
+  handlers:
+  - name: restart postgres
+    service: name=postgresql state=restarted
