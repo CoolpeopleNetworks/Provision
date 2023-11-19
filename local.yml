@@ -133,25 +133,6 @@
   - role: gitlab_server
 
 #
-# K8s Production Hosts
-#
-- hosts: k8s_prod
-  connection: local
-  become: true
-  roles:
-  - role: istvano.microk8s
-    vars:
-        microk8s_version: "1.28"
-        microk8s_enable_HA: true
-        microk8s_group_HA: "k8s_prod"
-        microk8s_plugins:
-          dns: "1.1.1.1"
-          ingress: true
-          helm: true
-          helm3: true
-          rook-ceph: true
-
-#
 # Postgresql Hosts
 #
 - hosts: postgresql_hosts
