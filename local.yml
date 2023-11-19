@@ -144,4 +144,4 @@
       name: 
       - postgresql
       - postgresql-contrib
-    state: present
+      state: present
