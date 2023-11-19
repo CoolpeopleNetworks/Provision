@@ -152,13 +152,23 @@
       state: started
       enabled: yes
 
-  - name: "Create admin database user"
+  - name: "ensure admin database user created"
     postgresql_user:
       state: present
       name: "admin"
       password: "bonky123"
     become: yes
     become_user: postgres
+
+  - name: "ensure admin database user has access to postgresql"
+      postgresql_privs:
+        type: database
+        database: "postgres"
+        roles: "admin"
+        grant_option: no
+        privs: all
+      become: yes
+      become_user: postgres
 
   handlers:
   - name: restart postgres
