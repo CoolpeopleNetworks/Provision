@@ -145,3 +145,8 @@
       - postgresql
       - postgresql-contrib
       state: present
+
+  - name: "ensure postgresql service started and enabled"
+      service: "name={{ item }} state=started enabled=yes"
+      with_items:
+        - postgresql
