@@ -150,3 +150,17 @@
           helm: true
           helm3: true
           rook-ceph: true
+
+#
+# Postgresql Hosts
+#
+- hosts: postgresql_hosts
+  connection: local
+  become: true
+  tasks:
+  - name: ensure postgresql package installed
+    package:
+      name: 
+      - postgresql
+      - postgresql-contrib
+    state: present
