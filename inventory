@@ -23,4 +23,4 @@ johnt-Surface-Pro
 gitlab
 
 [postgresql_hosts]
-postgresql-1
+postgresql-1 ansible_python_interpreter=/usr/bin/python3
