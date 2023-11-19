@@ -147,7 +147,7 @@
       state: present
 
   - name: "ensure postgresql service started and enabled"
-      service: 
-        name: postgresql
-        state: started
-        enabled: yes
+    service: 
+      name: postgresql
+      state: started
+      enabled: yes
