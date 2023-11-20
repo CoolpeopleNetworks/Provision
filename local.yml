@@ -171,6 +171,18 @@
     become: yes
     become_user: postgres
 
+  - name: "ensure host access for admin is allowed"
+    postgresql_pg_hba:
+      dest: "/etc/postgresql/14/main/pg_hba.conf"
+      contype: host
+      databases: all
+      method: address
+      users: "admin"
+      create: true
+    become: yes
+    become_user: postgres
+    notify: restart postgres
+
   handlers:
   - name: restart postgres
     service: name=postgresql state=restarted
