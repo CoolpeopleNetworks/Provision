@@ -176,7 +176,7 @@
       dest: "/etc/postgresql/14/main/pg_hba.conf"
       contype: host
       databases: all
-      method: address
+      method: password
       users: "admin"
       create: true
     become: yes
