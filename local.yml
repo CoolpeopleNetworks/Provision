@@ -153,23 +153,23 @@
       state: started
       enabled: yes
 
-  - name: "ensure admin database user created"
-    postgresql_user:
-      state: present
-      name: "admin"
-      password: "bonky123"
-    become: yes
-    become_user: postgres
+  # - name: "ensure admin database user created"
+  #   postgresql_user:
+  #     state: present
+  #     name: "admin"
+  #     password: "bonky123"
+  #   become: yes
+  #   become_user: postgres
 
-  - name: "ensure admin database user has access to postgresql"
-    postgresql_privs:
-      type: database
-      database: "postgres"
-      roles: "admin"
-      grant_option: no
-      privs: all
-    become: yes
-    become_user: postgres
+  # - name: "ensure admin database user has access to postgresql"
+  #   postgresql_privs:
+  #     type: database
+  #     database: "postgres"
+  #     roles: "admin"
+  #     grant_option: no
+  #     privs: all
+  #   become: yes
+  #   become_user: postgres
 
   - name: "ensure host access for admin is allowed"
     postgresql_pg_hba:
@@ -178,7 +178,7 @@
       source: 10.10.0.0/16
       databases: all
       method: password
-      users: "admin"
+      users: all
       create: true
     become: yes
     become_user: postgres
