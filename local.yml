@@ -183,6 +183,14 @@
     become_user: postgres
     notify: restart postgres
 
+  - name: Configure PostgreSQL. Set listen_addresses.
+    lineinfile: 
+      dest: /etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
+      regexp: "listen_addresses =" line="listen_addresses = '*'" state=present
+    become: yes
+    become_user: postgres
+    notify: restart postgres
+
   handlers:
   - name: restart postgres
     service: name=postgresql state=restarted
