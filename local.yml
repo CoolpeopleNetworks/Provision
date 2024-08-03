@@ -36,25 +36,12 @@
   #
   # ansible-pull support tasks
   #
-  - name: create ansible_puller user
-    user:
-      name: ansible_puller
-      system: yes
-
-  - name: ensure ansible_puller added to sudoers
-    copy:
-      src: files/sudoers_ansible_puller
-      dest: /etc/sudoers.d/ansible_puller
-      owner: root
-      group: root
-      mode: 0440
-
-  - name: ensure ansible_puller cron job created
-    cron:
-      name: ansible auto-provision
-      user: ansible_puller
-      minute: "*/10"
-      job: ansible-pull -o -U https://github.com/CoolpeopleNetworks/Provision.git
+  # - name: ensure ansible_puller cron job created
+  #   cron:
+  #     name: ansible auto-provision
+  #     user: ansible
+  #     minute: "*/10"
+  #     job: ansible-pull -o -U https://github.com/CoolpeopleNetworks/Provision.git
 
 #
 # Workstations
@@ -99,26 +86,6 @@
 
   roles:
   - role: headscale_server
-
-#
-# Podman Hosts
-#
-- hosts: podman_hosts
-  connection: local
-  become: true
-
-  roles:
-  - role: podman_host
-
-#
-# CouchDB Hosts
-#
-- hosts: couchdb_hosts
-  connection: local
-  become: true
-
-  roles:
-  - role: couchdb_server
 
 #
 # Gitlab Hosts
@@ -197,3 +164,100 @@
   handlers:
   - name: restart postgres
     service: name=postgresql state=restarted
+
+- hosts: k8s_prod
+  roles:
+  - role: ansible-keepalived
+    become: true
+    vars:
+      keepalived_instances:
+        internal:
+          interface: "{{ vrrp_nic | default(ansible_default_ipv4.interface, true) }}"
+          state: "{{ (groups['k8s_prod'].index(inventory_hostname) == 0) | ternary('MASTER','BACKUP') }}"
+          virtual_router_id: "{{ virtual_router_id }}"
+          priority: "{{ (inventory_hostname == groups['k8s_prod'][0]) | ternary('250', '100') }}"
+          vips:
+          - "{{ virtual_ip }} dev {{ vrrp_nic | default(ansible_default_ipv4.interface, true) }}"
+
+  - role: ansible_role_netdata
+    vars:
+      netdata_claim_rooms: 11ff9a75-358b-472a-97c5-f82bc8afd82c
+      netdata_claim_token: t6Ku6wbRh6JnwQRRDhkTFUBiBePsYmxDTGMOWPytkMbYgtx0FZZwF5zgxCIImxTuOfvio08TtUqa9ZHPCMyxEoGajP6UWjFB9zSfVpTjkV4HJK8pKTJ3ixhreQ8emrm3EqGfRS0
+
+  - role: ansible_role_microceph
+    become: true
+    vars:
+      microceph_cluster_nodes: k8s_prod
+      microceph_seed_node: r720xd-1
+      microceph_encrypt_data: False
+      microceph_replicate_count: 3
+
+  - role: ansible_role_microk8s
+    become: true
+    vars:
+      microk8s_version: 1.30/stable
+      microk8s_enable_HA: true
+      microk8s_group_HA: k8s_dev
+      microk8s_plugins:
+        community: true
+        dns: "1.1.1.1"
+        helm: true
+        helm3: true
+        hostpath-storage: false
+        istio: false
+        ingress: true
+        registry: true
+        rook-ceph: true
+        cert-manager: true
+        metallb: "10.10.202.1-10.10.202.254"
+
+  tasks:
+  - name: Ensure required packages installed
+    become: true
+    ansible.builtin.apt:
+      pkg:
+      - btop
+      - tmux
+      - lsscsi
+
+  - name: Ensure kubectl config created
+    become: true
+    ansible.builtin.shell: microk8s config > ~/.kube/config
+    changed_when: false
+
+  # - name: Ensure everestctl is installed
+  #   become: true
+  #   ansible.builtin.get_url:
+  #     url: https://github.com/percona/everest/releases/latest/download/everestctl-linux-amd64
+  #     dest: /usr/local/bin/everestctl
+  #     mode: '0555'
+
+- hosts: r720xd-1
+  become: true            
+  tasks:
+  - name: Get a list of existing storage classes
+    ansible.builtin.shell: microk8s kubectl get --no-headers storageclasses.storage.k8s.io
+    register: existing_ceph_rbd_storage_class
+    changed_when: False
+    ignore_errors: True
+
+  - name: Ensure Microceph and MicroK8s are connected
+    ansible.builtin.shell: microk8s connect-external-ceph
+    register: microceph_microk8s_connect
+    when: "'ceph-rbd' not in existing_ceph_rbd_storage_class.stdout"
+
+  - name: Ensure Microceph is the default K8s storage class
+    ansible.builtin.shell: |
+      kubectl patch storageclass ceph-rbd -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+    when: "'(default)' not in existing_ceph_rbd_storage_class.stdout"
+
+  # - name: Get the status of the Everest rollout (if any)
+  #   ansible.builtin.shell: |
+  #     kubectl -n everest-system rollout status deployment/percona-everest || true
+  #   register: everest_rollout_status
+  #   changed_when: false
+
+  # - name: Ensure Everest installed in cluster
+  #   ansible.builtin.shell: |
+  #     everestctl install --namespaces percona-everest --operator.mongodb=true --operator.postgresql=true --operator.xtradb-cluster=true --skip-wizard
+  #   when: "'successfully rolled out' not in everest_rollout_status.stdout"

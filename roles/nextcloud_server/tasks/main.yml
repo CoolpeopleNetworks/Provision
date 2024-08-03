@@ -1,6 +1,0 @@
----
-- name: Ensure the NextCloud snap package is installed
-  community.general.snap:
-    name: nextcloud
-    channel: "27/stable"
-    state: present

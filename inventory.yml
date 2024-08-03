@@ -1,0 +1,39 @@
+k8s_prod:
+  vars:
+    virtual_router_id: 41
+    virtual_ip: 10.10.201.10/22
+
+  hosts:
+    r720xd-1:
+      ansible_host: 10.10.201.11
+      vrrp_nic: eno1
+      netdata_hostname: R720XD-1
+      microceph_disk_devices:
+      - /dev/disk/by-id/scsi-SSEAGATE_ST91000640SS_9XG8FB170000C5313GGC
+      - /dev/disk/by-id/scsi-SSEAGATE_ST91000640SS_9XG4R0GX
+      - /dev/disk/by-id/scsi-SSEAGATE_ST91000640SS_9XG8FA6N0000C531GRW4
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001844GW45NF_0EHW45NF
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001631G5JBNM_0EG5JBNM
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001644GLAJRL_0EGLAJRL
+    r720xd-2:
+      ansible_host: 10.10.201.12
+      vrrp_nic: eno1
+      netdata_hostname: R720XD-2
+      microceph_disk_devices:
+      - /dev/disk/by-id/scsi-SSEAGATE_ST91000640SS_9XG515LE
+      - /dev/disk/by-id/scsi-SSEAGATE_ST91000640SS_9XG4QJKK
+      - /dev/disk/by-id/scsi-SSEAGATE_ST910006CLAR1000_9XG596N0_00009402RBFS
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001520G4KB6Z_06G4KB6Z
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001632G5J88M_0EG5J88M
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001537GK06TZ_06GK06TZ
+    r720xd-3:
+      ansible_host: 10.10.201.13
+      vrrp_nic: eno1
+      netdata_hostname: R720XD-3
+      microceph_disk_devices:
+      - /dev/disk/by-id/scsi-SSEAGATE_ST91000640SS_9XG5410T
+      - /dev/disk/by-id/scsi-SSEAGATE_ST91000640SS_9XG8FAM10000C531GUKT
+      - /dev/disk/by-id/scsi-SSEAGATE_ST910006CLAR1000_9XG57MBM_000094020PYH
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001631G5JK8M_0EG5JK8M
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001631G454GM_0EG454GM
+      - /dev/disk/by-id/scsi-SHGST_H101812SFSUN1.2T_001631G5JMHM_0EG5JMHM
